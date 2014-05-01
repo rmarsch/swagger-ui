@@ -897,10 +897,10 @@ Object.defineProperties(Request.prototype, {
     get: function() {
       if (!this._port) {
         // use the port of the URI if available
-		var port = document.URL.match(/:(\d+)\//);
-		if (port) {
-			return this._port = port[2];
-		}  
+	      var port = document.URL.match(/:(\d+)\//);
+	      if (port) {
+		      return this._port = port[1];
+	      }  
           
         switch(this.scheme) {
           case "https": return this._port = 443;
