@@ -23,7 +23,7 @@
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
-      url: "http://petstore.swagger.wordnik.com/api/api-docs",
+      url: "http://localhost:8080/api-docs",
       dom_id: "swagger-ui-container",
       supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
       onComplete: function(swaggerApi, swaggerUi){
@@ -55,7 +55,18 @@
         log("added key " + key);
         window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
       }
-    })
+    });
+    
+    $('#input_apiPort').change(function() {
+      var port = $('#input_apiPort')[0].value;
+      log("port: " + port);
+      
+      if(port && port.trim() != "") {
+        log("added port " + port);
+        window.swaggerAPIport = port;
+      }
+    });
+    
     window.swaggerUi.load();
   });
   </script>
@@ -74,6 +85,7 @@
       </div>
       <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
       <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+      <div class='input'><input placeholder="api port" id="input_apiPort" name="apiPort" type="text"/></div>
       <div class='input'><a id="explore" href="#">Explore</a></div>
     </form>
   </div>
