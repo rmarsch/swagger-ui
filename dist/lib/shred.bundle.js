@@ -896,8 +896,14 @@ Object.defineProperties(Request.prototype, {
   port: {
     get: function() {
       if (!this._port) {
+        var port = null;
+        
+        if(window.swaggerAPIport) {
+          return this._port = window.swaggerAPIport;
+        }
+        
         // use the port of the URI if available
-	      var port = document.URL.match(/:(\d+)\//);
+	      port = document.URL.match(/:(\d+)\//);
 	      if (port) {
 		      return this._port = port[1];
 	      }  
